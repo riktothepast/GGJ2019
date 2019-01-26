@@ -23,19 +23,15 @@ public class PlayerLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movementVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
-        movementVector *= movementSpeed * Time.deltaTime;
-
-        if (movementVector != Vector3.zero)
+        transform.Rotate(0, Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime, 0);
+        if (characterController.isGrounded)
         {
-            playerChildModel.transform.rotation = Quaternion.Lerp(playerChildModel.transform.rotation, Quaternion.LookRotation(movementVector), rotationSpeed * Time.deltaTime);
+            float verticalSpeed = Input.GetAxis("Vertical") > 0 ? Input.GetAxis("Vertical") : 0;
+            movementVector = Vector3.forward * verticalSpeed;
+            movementVector = transform.TransformDirection(movementVector);
+            movementVector *= movementSpeed;
         }
-
-        if (!characterController.isGrounded)
-        {
-            movementVector.y -= gravity * Time.deltaTime;
-        }
-
-        characterController.Move(movementVector);
+        movementVector.y -= gravity * Time.deltaTime;
+        characterController.Move(movementVector * Time.deltaTime);
     }
 }

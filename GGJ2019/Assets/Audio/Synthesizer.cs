@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Oscillator : MonoBehaviour
+public class Synthesizer : MonoBehaviour
 {
-    //293.66, 329.63, 349.23, 440, 466.16
+    //146.83, 164.81, 174.61,220.00,233.08,293.66, 329.63, 349.23, 440, 466.16
 
     private double sampling_frequency = 44100.0;
     private double freqMultiplier;
@@ -13,7 +13,7 @@ public class Oscillator : MonoBehaviour
     //Instrument 1
     public Transform player;
     public Transform target;
-    double[] notes = { 293.66, 329.63, 349.23, 466.16 };
+    double[] notes = { 110,146.83, 164.81, 174.61, 220.00, 233.08, 293.66, 329.63, 349.23, 440,  466.16 };
     double[] incs = new double[5];
     double[] phases = new double[5];
 
@@ -32,8 +32,14 @@ public class Oscillator : MonoBehaviour
     public float SquareOscAmp = 0.3f;
     public bool subSinOsc = false;
     public float subOscAmp = 0;
-    
 
+    //Sequencer
+    private bool hasSeqChanged = false;
+    public bool isSeq = false;
+    public double seqFreq = 4;
+    private double seqInc;
+    private double seqPhase;
+    private int currentNote = 0;
 
     //Freq LFO
     public bool isLFOFreq = false;
@@ -88,7 +94,7 @@ public class Oscillator : MonoBehaviour
     private void OnAudioFilterRead(float[] data, int channels)
     {
 
-        Instrument1Inc(freq);
+        Instrument1Inc();
         for (int i = 0; i < data.Length; i+= channels)
         {
             Instrument1UpdatePhases();
@@ -98,16 +104,19 @@ public class Oscillator : MonoBehaviour
                 data[i + 1] = data[i];
             }
         }
-       
+        if (isSeq)
+        {
+            ChangeNote();
+        }
     }
 
     //Instrument 1
-    private void Instrument1Inc(double freq){
+    private void Instrument1Inc(){
         if (isLFOFreq)
         {
-            freq = SinRanged(LFOPhase, (float)FundFreq * (1.0f - LFOFreqRange), (float)FundFreq * (1.0f + LFOFreqRange));
+            freq = SinRanged(LFOPhase, (float)notes[currentNote] * (1.0f - LFOFreqRange), (float)notes[currentNote] * (1.0f + LFOFreqRange));
         } else {
-            freq = FundFreq;
+            freq = notes[currentNote];
         }
         incs[0] = freq * freqMultiplier;
         incs[1] = incs[0] * 2.0;
@@ -117,6 +126,7 @@ public class Oscillator : MonoBehaviour
         incs[4] = incs[0] * 0.5;
         LFOInc = LFOFreq * freqMultiplier;
         LFOAmpInc = LFOAmpFreq * freqMultiplier;
+        seqInc = seqFreq * freqMultiplier;
     }
 
     private void Instrument1UpdatePhases(){
@@ -126,11 +136,32 @@ public class Oscillator : MonoBehaviour
         }
         LFOPhase += LFOInc;
         LFOAmpPhase += LFOAmpInc;
+        seqPhase += seqInc;
     }
 
+    //Change note
+    private void ChangeNote(){
+        float s = Mathf.Sin((float)seqPhase);
+        float r = s * 0.5f + 0.5f;
 
+        if (hasSeqChanged && s >= 0)
+        {
 
-    //Square
+            int t = (int)Mathf.Round((r * 1000 - Mathf.Floor(r * 1000)) * 10);
+            currentNote = t;
+            hasSeqChanged = !hasSeqChanged;
+        }
+        else if (!hasSeqChanged && s < 0)
+        {
+            hasSeqChanged = !hasSeqChanged;
+
+        }
+        if (currentNote>notes.Length-1){
+            currentNote = 0;
+        }
+    }
+
+    //Addittive synth section
     private float Instrument1Sig()
     {
         float sig = 0f;

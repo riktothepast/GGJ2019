@@ -23,6 +23,11 @@ public class InteractiveObject : MonoBehaviour
         unlocked
     }
 
+    private void OnMouseDown()
+    {
+        Interact();
+    }
+
     private void Start()
     {
         MementoManager manager = FindObjectOfType<MementoManager>();

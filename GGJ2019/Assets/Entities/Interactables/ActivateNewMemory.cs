@@ -8,7 +8,7 @@ public class ActivateNewMemory : MonoBehaviour
     MementoManager manager;
     private void Start()
     {
-        MementoManager manager = FindObjectOfType<MementoManager>();
+        manager = FindObjectOfType<MementoManager>();
     }
 
     public void Activate()

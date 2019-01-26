@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MementoManager : MonoBehaviour
 {
-    List<InteractiveObject> interactiveObjects;
+    List<InteractiveObject> interactiveObjects = new List<InteractiveObject>();
     void Start()
     {
         

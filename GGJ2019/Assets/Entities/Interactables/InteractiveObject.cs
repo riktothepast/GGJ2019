@@ -14,6 +14,9 @@ public class InteractiveObject : MonoBehaviour
     [SerializeField]
     int idToUnlock;
     public UnityEvent actions;
+    public UnityEvent onActive;
+    public UnityEvent onDeactivate;
+    bool canBeInteracted;
 
     public enum status {
         locked,
@@ -31,7 +34,10 @@ public class InteractiveObject : MonoBehaviour
 
     public void Interact()
     {
-        actions.Invoke();
+        if (canBeInteracted)
+        {
+            actions.Invoke();
+        }
     }
 
     public void SetStatus(status status)
@@ -57,5 +63,21 @@ public class InteractiveObject : MonoBehaviour
     public string GetName()
     {
         return name;
+    }
+
+    public void Activate(bool value)
+    {
+        canBeInteracted = value;
+        if (canBeInteracted)
+        {
+            onActive.Invoke();
+        } else {
+            onDeactivate.Invoke();
+        }
+    }
+
+    public bool IsActive()
+    {
+        return canBeInteracted;
     }
 }

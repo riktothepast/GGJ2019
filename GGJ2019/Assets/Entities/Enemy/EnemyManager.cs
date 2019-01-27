@@ -28,12 +28,21 @@ public class EnemyManager : MonoBehaviour
     Renderer rend;
     public GameObject cube;
 
+    private void Awake()
+    {
+        originalPos = transform.position;
+    }
+
+    private void OnEnable()
+    {
+        transform.position = originalPos;
+    }
+
     private void Start()
     {
         //to get access to shader
         rend = cube.GetComponent<Renderer>();
         rend.material.shader  = Shader.Find("Custom/EnemyShader");
-        originalPos = transform.position;
     }
 
     void Update()

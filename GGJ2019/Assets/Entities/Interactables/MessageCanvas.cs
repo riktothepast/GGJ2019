@@ -19,6 +19,7 @@ public class MessageCanvas : MonoBehaviour
 
     public void DestroyMessage()
     {
+        FindObjectOfType<AudioManager>().SetAudioState(AudioManager.audioStates.walking);
         Destroy(gameObject);
     }
 }

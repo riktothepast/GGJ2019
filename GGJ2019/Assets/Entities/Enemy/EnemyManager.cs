@@ -65,11 +65,13 @@ public class EnemyManager : MonoBehaviour
         if (colliderCount > 0) { // player detected
             MoveToPlayer();
             isChasing = true;
+            FindObjectOfType<AudioManager>().SetAudioState(AudioManager.audioStates.ghost);
             rend.material.SetFloat("_Chasing", 1.0f);
         } else
         {
             rend.material.SetFloat("_Chasing", 0f);
             isChasing = false;
+            FindObjectOfType<AudioManager>().SetAudioState(AudioManager.audioStates.walking);
             Rest();
         }
 

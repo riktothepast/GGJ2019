@@ -168,6 +168,7 @@ ModelImporter:
     2300086: Plane.003
     2300088: Plane.005
     2300090: Plane.006
+    2300092: //RootNode
     3300000: Cube.001
     3300002: Cube.003
     3300004: Cube.004
@@ -214,6 +215,7 @@ ModelImporter:
     3300086: Plane.003
     3300088: Plane.005
     3300090: Plane.006
+    3300092: //RootNode
     4300000: Plane.002
     4300002: Cube.086
     4300004: Cube.087

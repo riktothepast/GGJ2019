@@ -11,10 +11,10 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] float attack1Range = 1.0f;
     [SerializeField] float speed = 0.5f;
     [SerializeField] float speedRest = 0.05f;
-
+    float lastColliderCount = 0;
     //original Position
     Vector3 originalPos;
-
+    AudioManager audioManager;
 
     // Perlin Noise
     float tx;
@@ -43,6 +43,7 @@ public class EnemyManager : MonoBehaviour
         //to get access to shader
         rend = cube.GetComponent<Renderer>();
         rend.material.shader  = Shader.Find("Custom/EnemyShader");
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     void Update()
@@ -65,16 +66,19 @@ public class EnemyManager : MonoBehaviour
         if (colliderCount > 0) { // player detected
             MoveToPlayer();
             isChasing = true;
-            FindObjectOfType<AudioManager>().SetAudioState(AudioManager.audioStates.ghost);
+            audioManager.SetAudioState(AudioManager.audioStates.ghost);
             rend.material.SetFloat("_Chasing", 1.0f);
         } else
         {
             rend.material.SetFloat("_Chasing", 0f);
             isChasing = false;
-            FindObjectOfType<AudioManager>().SetAudioState(AudioManager.audioStates.walking);
+            if (lastColliderCount > 0)
+            {
+                audioManager.SetAudioState(AudioManager.audioStates.walking);
+            }
             Rest();
         }
-
+        lastColliderCount = colliderCount;
         //int i = 0;
         //while (i < colliderCount)
         //{

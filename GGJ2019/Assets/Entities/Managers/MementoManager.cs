@@ -29,6 +29,7 @@ public class MementoManager : MonoBehaviour
                 MessageCanvas newMessage = Instantiate(message);
                 Debug.Log(interactive.ToString());
                 newMessage.SetMessageData(currentObject.display_name, interactive.hints[Random.Range(0, interactive.hints.Length)]);
+                Time.timeScale = 0;
                 break;
             }
         }

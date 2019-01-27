@@ -3,16 +3,21 @@ using UnityEngine.Events;
 
 public class InteractiveObject : MonoBehaviour
 {
-    [SerializeField]
-    int id;
-    [SerializeField]
-    string name;
-    [SerializeField]
-    string description;
-    [SerializeField]
-    status currentStatus;
-    [SerializeField]
-    int idToUnlock;
+    //[SerializeField]
+    public int id;
+    //[SerializeField]
+    public string tname;
+    //[SerializeField]
+    public string display_name;
+    //[SerializeField]
+    public string description;
+    //[SerializeField]
+    public status currentStatus;
+    //[SerializeField]
+    public int idToUnlock;
+    //[SerializeField]
+    public string[] hints;
+
     public UnityEvent actions;
     public UnityEvent onActive;
     public UnityEvent onDeactivate;

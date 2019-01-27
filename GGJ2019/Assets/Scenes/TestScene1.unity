@@ -1641,25 +1641,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amp: 0.2
   target: {fileID: 1362092439}
-  FundFreq: 440
+  preset: 2
+  myScale: 1
+  isSeq: 1
+  seqFreq: 4
+  octave: 3
   SinOsc: 1
-  SinOscAmp: 0.3
+  SinOscAmp: 0.41
   TriOsc: 0
-  TriOscAmp: 0.3
+  TriOscAmp: 0.45
   SawOsc: 0
   SawOscAmp: 0.3
   SquareOsc: 0
   SquareOscAmp: 0.3
   subSinOsc: 0
   subOscAmp: 0
-  isSeq: 1
-  seqFreq: 4
-  isLFOFreq: 0
-  LFOFreq: 4
-  LFOFreqRange: 0.4
   isLFOAmp: 0
   LFOAmpFreq: 0.5
   LFOAmpRange: 0.4
+  isLockFreqToSeq: 0
+  isLFOFreq: 0
+  LFOFreq: 4
+  LFOFreqRange: 0.4
   distThreshold: 3
 --- !u!82 &528335128
 AudioSource:
@@ -11796,6 +11799,7 @@ MonoBehaviour:
   gravity: 9.8
   movementSpeed: 3
   rotationSpeed: 20
+  animator: {fileID: 0}
 --- !u!143 &1940017289
 CharacterController:
   m_ObjectHideFlags: 0

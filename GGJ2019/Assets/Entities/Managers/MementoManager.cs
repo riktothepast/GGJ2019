@@ -28,6 +28,7 @@ public class MementoManager : MonoBehaviour
                 interactive.SetStatus(InteractiveObject.status.unlocked);
                 MessageCanvas newMessage = Instantiate(message);
                 newMessage.SetMessageData(interactive.display_name, interactive.description);
+                break;
             }
         }
     }

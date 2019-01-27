@@ -28,20 +28,28 @@ public class PlayerLogic : MonoBehaviour
         float verticalSpeed = Input.GetAxis("Vertical") > 0 ? Input.GetAxis("Vertical") : 0;
         float horizontalSpeed = Input.GetAxis("Horizontal");
 
+        if (verticalSpeed == 0 && horizontalSpeed == 0)
+        {
+            animator.SetBool("Walk", false);
+        }
+
         if (horizontalSpeed != 0 )
         {
             transform.Rotate(0, horizontalSpeed * rotationSpeed * Time.deltaTime, 0);
             if (verticalSpeed == 0)
             {
-                animator.Play("Rotate");
+                animator.SetBool("Rotate", true);
             }
+        } else
+        {
+            animator.SetBool("Rotate", false);
         }
 
         if (characterController.isGrounded)
         {
             if (verticalSpeed > 0)
             {
-                animator.Play("Walk");
+                animator.SetBool("Walk", true);
             }
             movementVector = Vector3.forward * verticalSpeed;
             movementVector = transform.TransformDirection(movementVector);

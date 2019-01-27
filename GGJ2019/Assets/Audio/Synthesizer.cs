@@ -92,18 +92,20 @@ public class Synthesizer : MonoBehaviour
 
     private void Awake()
     {
+        preset = Preset.Dreamy;
+        amp = 0.3f;
         freqMultiplier = 2.0 * Mathf.PI / sampling_frequency;
     }
 
     private void Update()
     {
 
-        if (target1.isChasing || target2.isChasing){
-            preset = Preset.Pacman;
+        //if (target1.isChasing || target2.isChasing){
+        //    preset = Preset.Pacman;
 
-        } else {
-            preset = Preset.Dreamy;
-        }
+        //} else {
+        //    preset = Preset.Dreamy;
+        //}
 
 
         if (isLockFreqToSeq)
@@ -124,8 +126,29 @@ public class Synthesizer : MonoBehaviour
         setPreset();
     }
 
+    public void ChoosePreset(AudioManager.audioStates audioState)
+    {
 
-    private void OnAudioFilterRead(float[] data, int channels)
+
+        if (audioState.Equals(AudioManager.audioStates.nearObject))
+        {
+            preset = Preset.Famicom;
+        }
+        else if (audioState.Equals(AudioManager.audioStates.discoveringObject))
+        {
+            preset = Preset.Happyish;
+        } else if (audioState.Equals(AudioManager.audioStates.ghost))
+        {
+            preset = Preset.Pacman;
+        }
+        else if (audioState.Equals(AudioManager.audioStates.walking))
+            {
+                preset = Preset.Dreamy;
+            }
+    }
+
+
+        private void OnAudioFilterRead(float[] data, int channels)
     {
 
         Instrument1Inc();

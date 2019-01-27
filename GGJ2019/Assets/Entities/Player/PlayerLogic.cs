@@ -14,6 +14,10 @@ public class PlayerLogic : MonoBehaviour
     float rotationSpeed;
     [SerializeField]
     Animator animator;
+    [SerializeField]
+    float lifePoints = 100f;
+    [SerializeField]
+    int framesToReceiveDamage = 30;
     Vector3 movementVector;
 
     // Start is called before the first frame update
@@ -57,5 +61,20 @@ public class PlayerLogic : MonoBehaviour
         }
         movementVector.y -= gravity * Time.deltaTime;
         characterController.Move(movementVector * Time.deltaTime);
+    }
+
+    int currentFrames;
+    public void DealDamage(float value)
+    {
+        currentFrames++;
+        if (currentFrames > framesToReceiveDamage)
+        {
+            currentFrames = 0;
+            lifePoints -= value;
+            if (lifePoints <= 0)
+            {
+                GetComponent<LoadScene>().Load();
+            }
+        }
     }
 }

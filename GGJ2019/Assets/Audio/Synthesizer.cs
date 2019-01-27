@@ -92,7 +92,6 @@ public class Synthesizer : MonoBehaviour
 
     private void Awake()
     {
-        preset = Preset.Dreamy;
         amp = 0.3f;
         freqMultiplier = 2.0 * Mathf.PI / sampling_frequency;
     }

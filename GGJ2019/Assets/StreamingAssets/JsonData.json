@@ -25,9 +25,9 @@
     {
       "id": 3,
       "idToUnlock": 6,
-      "tname": "Floot",
-      "display_name": "Floot",
-      "description": "Floot description!",
+      "tname": "Flute",
+      "display_name": "Flute",
+      "description": "Flute description!",
       "hints": [
         "learning to play songs",
         "learning the Cmajor scale",

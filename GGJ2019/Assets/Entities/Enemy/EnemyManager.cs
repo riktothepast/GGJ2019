@@ -124,8 +124,14 @@ public class EnemyManager : MonoBehaviour
         {
             //transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
         }
+    }
 
-        
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject == player)
+        {
+            player.GetComponent<PlayerLogic>().DealDamage(1f);
+        }
     }
 
 }

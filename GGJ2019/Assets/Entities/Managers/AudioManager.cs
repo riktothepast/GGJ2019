@@ -16,6 +16,6 @@ public class AudioManager : MonoBehaviour
     public void SetAudioState(audioStates audioState)
     {
         currentAudioState = audioState;
-
+        synthesizer.ChoosePreset(audioState);
     }
 }

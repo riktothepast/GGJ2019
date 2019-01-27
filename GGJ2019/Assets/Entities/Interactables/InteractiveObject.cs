@@ -22,6 +22,8 @@ public class InteractiveObject : MonoBehaviour
     public UnityEvent onActive;
     public UnityEvent onDeactivate;
     bool canBeInteracted;
+    AudioManager audioManager;
+    MementoManager mementoManager;
 
     public enum status {
         locked,
@@ -35,10 +37,11 @@ public class InteractiveObject : MonoBehaviour
 
     private void Start()
     {
-        MementoManager manager = FindObjectOfType<MementoManager>();
-        if (manager)
+        audioManager = FindObjectOfType<AudioManager>();
+        mementoManager = FindObjectOfType<MementoManager>();
+        if (mementoManager)
         {
-            manager.AddInteractableObject(this);
+            mementoManager.AddInteractableObject(this);
         }
     }
 
@@ -47,7 +50,7 @@ public class InteractiveObject : MonoBehaviour
         if (canBeInteracted)
         {
             actions.Invoke();
-            FindObjectOfType<AudioManager>().SetAudioState(AudioManager.audioStates.discoveringObject);
+            audioManager.SetAudioState(AudioManager.audioStates.discoveringObject);
         }
     }
 
@@ -78,14 +81,15 @@ public class InteractiveObject : MonoBehaviour
 
     public void Activate(bool value)
     {
+        bool previousState = canBeInteracted;
         canBeInteracted = value;
         if (canBeInteracted)
         {
             onActive.Invoke();
-            FindObjectOfType<AudioManager>().SetAudioState(AudioManager.audioStates.nearObject);
+            audioManager.SetAudioState(AudioManager.audioStates.nearObject);
         } else {
             onDeactivate.Invoke();
-            FindObjectOfType<AudioManager>().SetAudioState(AudioManager.audioStates.walking);
+            audioManager.SetAudioState(AudioManager.audioStates.walking);
         }
     }
 

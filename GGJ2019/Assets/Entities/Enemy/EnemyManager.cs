@@ -17,10 +17,19 @@ public class EnemyManager : MonoBehaviour
     float tz;
     public float txinc;
     public float tzinc;
-    public float xmin;
-    public float xmax;
-    public float zmax;
-    public float zmin;
+
+    public bool isChasing = false;
+    //to send to shader
+    Renderer rend;
+    public GameObject cube;
+
+    private void Start()
+    {
+        //to get access to shader
+        rend = cube.GetComponent<Renderer>();
+        rend.material.shader  = Shader.Find("Custom/EnemyShader");
+
+    }
 
     void Update()
     {
@@ -36,8 +45,12 @@ public class EnemyManager : MonoBehaviour
 
         if (colliderCount > 0) { // player detected
             MoveToPlayer();
+            isChasing = true;
+            rend.material.SetFloat("_Chasing", 1.0f);
         } else
         {
+            rend.material.SetFloat("_Chasing", 0f);
+            isChasing = false;
             Rest();
         }
 

@@ -10,6 +10,7 @@ public class CameraToggle : MonoBehaviour
 
     void Start()
     {
+        GetComponent<Renderer>().enabled = false;
         cameraManager = FindObjectOfType<CameraManager>();
         cameraManager.AddCameraToTrackList(vrCamera);
     }

@@ -19,6 +19,9 @@ public class CameraManager : MonoBehaviour
 
     public void AddCameraToTrackList(CinemachineVirtualCamera vrCamera)
     {
-        vrCameraList.Add(vrCamera);
+        if (!vrCameraList.Contains(vrCamera))
+        {
+            vrCameraList.Add(vrCamera);
+        }
     }
 }

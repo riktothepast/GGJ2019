@@ -52,7 +52,7 @@
     
                 //float red = (sin(TWO_PI*cos(TWO_PI*st.x*st.y)*_Time[1])+1)/2;
                 
-                float red = (sin(TWO_PI*st.y*10)*cos(_Time[1])+1)/2;
+                float red = (sin(TWO_PI*st.y*sin(st.x*10)*50)*cos(_Time[1])+1)/2;
                 //float alphaRed = (cos(TWO_PI*sin(TWO_PI*st.x*st.y))+1)/2;
                 
         

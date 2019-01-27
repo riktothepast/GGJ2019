@@ -45,18 +45,17 @@
             {
                 //normalize the Coordinates min 0 max 1 in both x and y axis
                 float2 st = sp.xy/_ScreenParams.xy;
-                float4 color = float4(0,0,0,0);
+                float4 color = float4(0,0,0,1);
     
     
-                float red = (sin(TWO_PI*cos(TWO_PI*st.x*st.y)*_Time[1])+1)/2;
-                float alphaRed = (cos(TWO_PI*sin(TWO_PI*st.x*st.y))+1)/2;
-        
-        
-                float blue  = sin(TWO_PI*cos(TWO_PI*st.x*sin(TWO_PI*st.y))*_Time[1]);
-                float alphaBlue = (cos(TWO_PI*sin(TWO_PI*st.x*sin(TWO_PI*st.x)))+1)/2;
-        
+                //float red = (sin(TWO_PI*cos(TWO_PI*st.x*st.y)*_Time[1])+1)/2;
+                //float alphaRed = (cos(TWO_PI*sin(TWO_PI*st.x*st.y))+1)/2;
+                //float blue  = sin(TWO_PI*cos(TWO_PI*st.x*sin(TWO_PI*st.y))*_Time[1]);
+                //float alphaBlue = (cos(TWO_PI*sin(TWO_PI*st.x*sin(TWO_PI*st.x)))+1)/2;
+                float green = sin(TWO_PI*st.x*20+_Time[1]*cos(_Time[1]))*cos(TWO_PI*st.y*20+_Time[1]*sin(_Time[1]));
                 
-                color = lerp(float4(red,0,0,alphaRed), float4(0,0,blue,alphaBlue), 0.5);
+                //color = lerp(float4(0, red,0,alphaRed), float4(0,0,blue,alphaBlue), 0.5);
+                color.g = green;
                 return color;
             }
             ENDCG

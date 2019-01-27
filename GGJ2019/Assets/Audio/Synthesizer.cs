@@ -8,11 +8,13 @@ public class Synthesizer : MonoBehaviour
 
     private double sampling_frequency = 44100.0;
     private double freqMultiplier;
-    public float amp;
+    public float amp = 0.3f;
 
     //Instrument 1
     //public Transform player;
-    public EnemyManager target;
+    public EnemyManager target1;
+    public EnemyManager target2;
+
     double[] notes = { 110, 146.83, 164.81, 174.61,    220.00, 233.08, 293.66, 329.63, 349.23, 440, 466.16 };
 
     double[] happyNotes = { 146.83, 164.81, 185.00, 196.00, 220.00, 246.94, 277.18, 293.66, 329.633, 369.99, 392.00 };
@@ -96,37 +98,14 @@ public class Synthesizer : MonoBehaviour
     private void Update()
     {
 
-        //if (target.isChasing){
-        //    SinOscAmp = 0.4f;
-        //    SawOsc = true;
-        //    isLFOFreq = true;
-        //    isSeq = false;
+        if (target1.isChasing || target2.isChasing){
+            preset = Preset.Pacman;
 
-        //} else {
-        //    SinOscAmp = 0.6f;
-        //    SawOsc = false;
-        //    isLFOFreq = false;
-        //    isSeq = true;
-        //}
-        //double dist = Vector3.Distance(player.position, target.position);
+        } else {
+            preset = Preset.Dreamy;
+        }
 
-        //if (dist < distThreshold && !isCloseToTarget)
-        //{
-        //    FundFreq = notes[Random.Range(0, 4)];
-        //    LFOFreq = (distThreshold - dist) * 9;
-        //    isCloseToTarget = true;
-        //    isLFOFreq = true;
-        //    LFOAmpFreq = 6;
-        //} else if (dist > distThreshold && isCloseToTarget) {
 
-        //    FundFreq = 440;
-        //    LFOAmpFreq = 0.5;
-        //    isCloseToTarget = false;
-        //    isLFOFreq = false;
-        //}
-        //For theramin effect
-        //frequency = fundFrequency * (1.0 + player.normalizedPosX);
-        //amp = player.normalizedPosY;
         if (isLockFreqToSeq)
         {
             LFOAmpFreq = seqFreq;

@@ -12,11 +12,16 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] float speed = 0.5f;
     [SerializeField] float speedRest = 0.05f;
 
+    //original Position
+    Vector3 originalPos;
+
+
     // Perlin Noise
     float tx;
     float tz;
     public float txinc;
     public float tzinc;
+
 
     public bool isChasing = false;
     //to send to shader
@@ -28,13 +33,18 @@ public class EnemyManager : MonoBehaviour
         //to get access to shader
         rend = cube.GetComponent<Renderer>();
         rend.material.shader  = Shader.Find("Custom/EnemyShader");
-
+        originalPos = transform.position;
     }
 
     void Update()
     {
         DoDetect(transform.position, distance);
         //Rest();
+
+        if (transform.position.x>10 || transform.position.x <-10
+            || transform.position.z > 10 || transform.position.z < -10){
+            transform.position = originalPos;
+        }
     }
 
 
@@ -85,11 +95,15 @@ public class EnemyManager : MonoBehaviour
     {
         Transform target = player.transform;
         //rotate to look at player
-        transform.LookAt(target.position);
-        transform.Rotate(new Vector3(0, -90, 0), Space.Self);
+        if (Mathf.Abs(target.position.y - transform.position.y) < 0.5f)
+        {
 
-        transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
 
+            transform.LookAt(target.position);
+            transform.Rotate(new Vector3(0, -90, 0), Space.Self);
+
+            transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+        }
         //move towards player
         if (Vector3.Distance(transform.position, target.position) > attack1Range)
         {

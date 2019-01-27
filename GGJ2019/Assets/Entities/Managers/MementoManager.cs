@@ -90,6 +90,7 @@ public class MementoManager : MonoBehaviour
                     aa.description = tobj.description;
                     aa.hints = tobj.hints;
                     aa.name = "object_"+tobj.id + "_" + tobj.tname;
+                    aa.AssignObject(tobj.id);
                 }
                 jj++;
             }

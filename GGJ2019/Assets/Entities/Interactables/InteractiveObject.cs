@@ -18,6 +18,9 @@ public class InteractiveObject : MonoBehaviour
     //[SerializeField]
     public string[] hints;
 
+    [SerializeField]
+    public GameObject availableObjects;
+
     public UnityEvent actions;
     public UnityEvent onActive;
     public UnityEvent onDeactivate;
@@ -96,5 +99,13 @@ public class InteractiveObject : MonoBehaviour
     public bool IsActive()
     {
         return canBeInteracted;
+    }
+
+    public void AssignObject(int id)
+    {
+        availableObjects.transform.GetChild(id - 1).gameObject.SetActive(true);
+        Debug.Log("AssignObject("+id+")" +
+            availableObjects.transform.GetChild(id - 1).gameObject.name
+            );
     }
 }

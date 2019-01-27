@@ -13,6 +13,9 @@ public class ActivateNewMemory : MonoBehaviour
 
     public void Activate()
     {
-        manager.ActivateObject(interactiveObject);
+        manager
+            .ActivateObject(
+            interactiveObject
+            );
     }
 }

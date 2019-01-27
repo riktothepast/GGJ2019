@@ -19,15 +19,16 @@ public class MementoManager : MonoBehaviour
         interactiveObjects.Add(interactable);
     }
 
-    public void ActivateObject(int idToUnlock)
+    public void ActivateObject(InteractiveObject currentObject)
     {
         foreach (InteractiveObject interactive in interactiveObjects)
         {
-            if (interactive.GetID().Equals(idToUnlock))
+            if (interactive.GetID().Equals(currentObject.GetIDToUnlock()))
             {
                 interactive.SetStatus(InteractiveObject.status.unlocked);
                 MessageCanvas newMessage = Instantiate(message);
-                newMessage.SetMessageData(interactive.display_name, interactive.description);
+                Debug.Log(interactive.ToString());
+                newMessage.SetMessageData(currentObject.display_name, interactive.hints[Random.Range(0, interactive.hints.Length)]);
                 break;
             }
         }
@@ -72,6 +73,7 @@ public class MementoManager : MonoBehaviour
         {
             Debug.Log("SpawnPoint! " + spoint.id.ToString());
             Debug.Log("data??! " + gameData.objectos.Length);
+            spoint.gameObject.SetActive(false);
             InteractiveObject aa = (InteractiveObject)Instantiate(baseObject, spoint.transform.position, baseObject.transform.rotation);
 
             int jj = 0;

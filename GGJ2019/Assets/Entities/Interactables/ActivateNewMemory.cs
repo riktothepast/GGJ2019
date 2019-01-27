@@ -13,6 +13,6 @@ public class ActivateNewMemory : MonoBehaviour
 
     public void Activate()
     {
-        manager.ActivateObject(interactiveObject.GetIDToUnlock());
+        manager.ActivateObject(interactiveObject);
     }
 }

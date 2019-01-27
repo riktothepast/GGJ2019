@@ -47,6 +47,7 @@ public class InteractiveObject : MonoBehaviour
         if (canBeInteracted)
         {
             actions.Invoke();
+            FindObjectOfType<AudioManager>().SetAudioState(AudioManager.audioStates.discoveringObject);
         }
     }
 
@@ -81,8 +82,10 @@ public class InteractiveObject : MonoBehaviour
         if (canBeInteracted)
         {
             onActive.Invoke();
+            FindObjectOfType<AudioManager>().SetAudioState(AudioManager.audioStates.nearObject);
         } else {
             onDeactivate.Invoke();
+            FindObjectOfType<AudioManager>().SetAudioState(AudioManager.audioStates.walking);
         }
     }
 

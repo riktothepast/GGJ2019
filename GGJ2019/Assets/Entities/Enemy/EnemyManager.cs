@@ -12,29 +12,48 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] float speed = 0.5f;
     [SerializeField] float speedRest = 0.05f;
 
+    //original Position
+    Vector3 originalPos;
+
+
     // Perlin Noise
     float tx;
     float tz;
     public float txinc;
     public float tzinc;
 
+
     public bool isChasing = false;
     //to send to shader
     Renderer rend;
     public GameObject cube;
+
+    private void Awake()
+    {
+        originalPos = transform.position;
+    }
+
+    private void OnEnable()
+    {
+        transform.position = originalPos;
+    }
 
     private void Start()
     {
         //to get access to shader
         rend = cube.GetComponent<Renderer>();
         rend.material.shader  = Shader.Find("Custom/EnemyShader");
-
     }
 
     void Update()
     {
         DoDetect(transform.position, distance);
         //Rest();
+
+        if (transform.position.x>10 || transform.position.x <-10
+            || transform.position.z > 10 || transform.position.z < -10){
+            transform.position = originalPos;
+        }
     }
 
 
@@ -46,11 +65,13 @@ public class EnemyManager : MonoBehaviour
         if (colliderCount > 0) { // player detected
             MoveToPlayer();
             isChasing = true;
+            FindObjectOfType<AudioManager>().SetAudioState(AudioManager.audioStates.ghost);
             rend.material.SetFloat("_Chasing", 1.0f);
         } else
         {
             rend.material.SetFloat("_Chasing", 0f);
             isChasing = false;
+            FindObjectOfType<AudioManager>().SetAudioState(AudioManager.audioStates.walking);
             Rest();
         }
 
@@ -85,11 +106,15 @@ public class EnemyManager : MonoBehaviour
     {
         Transform target = player.transform;
         //rotate to look at player
-        transform.LookAt(target.position);
-        transform.Rotate(new Vector3(0, -90, 0), Space.Self);
+        if (Mathf.Abs(target.position.y - transform.position.y) < 0.5f)
+        {
 
-        transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
 
+            transform.LookAt(target.position);
+            transform.Rotate(new Vector3(0, -90, 0), Space.Self);
+
+            transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+        }
         //move towards player
         if (Vector3.Distance(transform.position, target.position) > attack1Range)
         {

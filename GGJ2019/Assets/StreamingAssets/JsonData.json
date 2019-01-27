@@ -1,39 +1,72 @@
 {
   "objectos": [
     {
-      "id": 1,
-      "idToUnlock": 2,
-      "tname": "Reloj",
-      "display_name": "reloj",
-      "description": "reloj description!",
+      "id": 4,
+      "idToUnlock": 1,
+      "tname": "Eye glasses",
+      "display_name": "Eye glasses",
+      "description": "Eye glasses description!",
       "hints": [
-        "cuando eran las 5pm y tomabamos nuestro primer cafe",
-        "cuando salia tarde al trabajo",
-        "que es importante llegar temprano"
+        "being able to see better"
+      ]
+    },
+    {
+      "id": 1,
+      "idToUnlock": 4,
+      "tname": "Clock",
+      "display_name": "Clock",
+      "description": "Clock description!",
+      "hints": [
+        "at 5pm we used to have coffee",
+        "running late for work in the morning",
+        "watching my favorite show at 8pm"
+      ]
+    },
+    {
+      "id": 3,
+      "idToUnlock": 6,
+      "tname": "Floot",
+      "display_name": "Floot",
+      "description": "Floot description!",
+      "hints": [
+        "learning to play songs",
+        "learning the Cmajor scale",
+        "that I like to play music"
+      ]
+    },
+    {
+      "id": 6,
+      "idToUnlock": 5,
+      "tname": "Hat",
+      "display_name": "Hat",
+      "description": "Hat description!",
+      "hints": [
+        "protecting my face from the sun",
+        "something I use on my head",
+        "she gave this to me at our trip to the beach"
+      ]
+    },
+    {
+      "id": 5,
+      "idToUnlock": 2,
+      "tname": "Fish tank",
+      "display_name": "Fish tank",
+      "description": "Fish tank description!",
+      "hints": [
+        "see my little fish swin around",
+        "feed my little pets",
+        "clean the home of my little pets"
       ]
     },
     {
       "id": 2,
       "idToUnlock": 3,
-      "tname": "Lampara",
-      "display_name": "lampara",
-      "description": "lampara description!",
+      "tname": "Lamp",
+      "display_name": "Lamp",
+      "description": "Lamp description!",
       "hints": [
-        "que leiamos un libro en cama para quedarnos dormidos",
-        "despertar a media noche y poder ver para poder levantarme",
-        "despertar a media noche y poder ver para poder levantarme"
-      ]
-    },
-    {
-      "id": 3,
-      "idToUnlock": 1,
-      "tname": "Flauta",
-      "display_name": "flauta",
-      "description": "flauta description!",
-      "hints": [
-        "aprendiendo a tocar una cancion",
-        "la escala de C mayor",
-        "me gusta tocar musica"
+        "reading a book at nights in bed",
+        "waking up at night and turning on the lights to get up"
       ]
     }
   ]

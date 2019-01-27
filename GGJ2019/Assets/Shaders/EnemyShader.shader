@@ -8,7 +8,7 @@
     SubShader
     {
         // No culling or depth
-        Cull Off ZWrite Off ZTest Always
+        Cull Off ZWrite Off ZTest LEqual
 
         Pass
         {
@@ -59,9 +59,9 @@
                 
         
                 if (_Chasing<0.5){
-                color = float4(red,red,red,1);
+                color = float4(red,red,red,0.1);
                 } else {
-                color = float4(red,0,0,1);
+                color = float4(red,0,0,0.1);
                 }
                 return color;
             }

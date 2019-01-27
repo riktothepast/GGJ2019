@@ -6,6 +6,7 @@ public class MementoManager : MonoBehaviour
 {
     [SerializeField] InteractiveObject baseObject;
     [SerializeField] List<ObjectSpawnPoint> spawnPoints;
+    [SerializeField] MessageCanvas message;
 
     List<InteractiveObject> interactiveObjects = new List<InteractiveObject>();
     void Start()
@@ -25,6 +26,8 @@ public class MementoManager : MonoBehaviour
             if (interactive.GetID().Equals(idToUnlock))
             {
                 interactive.SetStatus(InteractiveObject.status.unlocked);
+                MessageCanvas newMessage = Instantiate(message);
+                newMessage.SetMessageData(interactive.display_name, interactive.description);
             }
         }
     }

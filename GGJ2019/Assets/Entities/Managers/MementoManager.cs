@@ -21,25 +21,35 @@ public class MementoManager : MonoBehaviour
 
     public void ActivateObject(InteractiveObject currentObject)
     {
-        int unlockedItems = 0;
         foreach (InteractiveObject interactive in interactiveObjects)
         {
+
             if (interactive.GetID().Equals(currentObject.GetIDToUnlock()))
             {
                 interactive.SetStatus(InteractiveObject.status.unlocked);
-                if (interactive.currentStatus == InteractiveObject.status.unlocked)
-                {
-                    unlockedItems++;
-                }
+
                 MessageCanvas newMessage = Instantiate(message);
                 Debug.Log(interactive.ToString());
                 newMessage.SetMessageData(currentObject.display_name, interactive.hints[Random.Range(0, interactive.hints.Length)]);
                 Time.timeScale = 0;
             }
         }
-        if (unlockedItems >= interactiveObjects.Count)
+    }
+
+    public void CheckForGameComplete()
+    {
+        int unlockedItems = 0;
+        foreach (InteractiveObject interactive in interactiveObjects)
         {
-            GetComponent<LoadScene>().Load();
+            if (interactive.currentStatus == InteractiveObject.status.unlocked)
+            {
+                unlockedItems++;
+            }
+            Debug.Log(unlockedItems + " " + interactiveObjects.Count);
+            if (unlockedItems >= interactiveObjects.Count)
+            {
+                GetComponent<LoadScene>().Load();
+            }
         }
     }
 
@@ -98,6 +108,8 @@ public class MementoManager : MonoBehaviour
                     aa.description = tobj.description;
                     aa.hints = tobj.hints;
                     aa.name = "object_"+tobj.id + "_" + tobj.tname;
+                    aa.AssignObject(tobj.id);
+                    aa.SetStatus(InteractiveObject.status.locked);
                 }
                 jj++;
             }

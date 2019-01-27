@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6554714885379247041}
   - component: {fileID: 6554714885379247040}
   - component: {fileID: 6554714885379247055}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6554714885754805631}
   - component: {fileID: 7894531562785599801}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: ObjectSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
